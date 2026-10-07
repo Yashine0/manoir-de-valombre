@@ -1,0 +1,17 @@
+/* =====================================================================
+   Mise en page robuste : hauteurs en % (et non position fixe / 100vh),
+   pour fonctionner dans un cadre (page hébergée), un navigateur ou Electron.
+   ===================================================================== */
+html, body { height: 100%; }
+body { overflow: hidden; }
+
+.screen { position: relative; inset: auto; }
+.screen.active { display: flex; height: 100%; overflow-y: auto; }
+
+/* écrans centrés : marge auto (centre sans couper le haut quand ça déborde) */
+#title.active, #intro.active { align-items: normal; justify-content: normal; padding: 32px 16px; }
+#title .folder, #intro .intro-box { margin: auto; }
+
+/* jeu : grille pleine hauteur, seul #main défile */
+#game.active { display: grid; height: 100%; overflow: hidden; }
+#main { min-height: 0; }

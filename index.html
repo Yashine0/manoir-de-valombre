@@ -1,0 +1,88 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+  <meta name="theme-color" content="#0e0c0a">
+  <meta name="author" content="yac">
+  <meta name="description" content="Dossier 17 - Le Manoir de Valombre : un jeu d'enquête. Une nuit, six suspects, un meurtre. By yac.">
+  <link rel="icon" type="image/png" href="electron/icon.png">
+  <link rel="apple-touch-icon" href="electron/icon.png">
+  <title>Dossier 17 - Le Manoir de Valombre</title>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/layout.css">
+<!-- ÉCRAN TITRE -->
+  <section id="title" class="screen">
+    <div class="folder">
+      <div class="folder-tab"></div>
+      <div class="folder-top"><span>CELLULE CRIMINELLE</span><span>18.10.2026</span></div>
+      <h1>DOSSIER 17</h1>
+      <div class="rule"></div>
+      <h2>LE MANOIR DE VALOMBRE</h2>
+      <p class="tagline">Une nuit. Six suspects. Un meurtre.<br>Une chronologie impossible.</p>
+      <div class="menu">
+        <button class="btn big" id="btn-continue" hidden>Reprendre l'enquête</button>
+        <button class="btn big" id="btn-new">Nouvelle enquête</button>
+        <div class="menu-row"><button class="btn ghost" id="btn-sound-title">🔈 Activer le son</button><button class="btn ghost" id="btn-options-title">⚙ Options</button></div>
+      </div>
+      <div class="stamp">CONFIDENTIEL</div>
+      <p class="byline">By yac</p>
+      <p class="fiction">Jeu d'enquête fictionnel - tous les personnages sont fictifs</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section id="intro" class="screen">
+    <div class="intro-box">
+      <div class="intro-head">TRANSCRIPTION - CENTRE DE TRAITEMENT DES APPELS · REF. A-01</div>
+      <div id="intro-text"></div>
+      <button class="btn big" id="intro-next" hidden>Entrer dans le manoir</button>
+      <p class="skip">Cliquez pour passer</p>
+    </div>
+  </section>
+
+  <!-- JEU -->
+  <section id="game" class="screen">
+    <header class="topbar">
+      <div class="brand"><b>DOSSIER 17</b><span>Manoir de Valombre · <em class="by">by yac</em></span></div>
+      <div class="stats">
+        <span title="Pièces au dossier">📁 <b id="stat-pieces">0</b>/<span id="stat-total">0</span></span>
+        <span title="Contradictions et vérifications relevées">⚖ <b id="stat-contra">0</b>/<span id="stat-contra-total">0</span></span>
+        <span title="Déductions">📌 <b id="stat-links">0</b>/<span id="stat-links-total">0</span></span>
+        <span title="Crédibilité de votre dossier" class="cred hi">Crédibilité <b id="stat-cred">100%</b></span>
+      </div>
+      <div class="top-actions">
+        <button class="icon" id="btn-mission" title="Ordre de mission">📋</button>
+        <button class="icon" id="btn-sound" title="Son">🔈</button>
+        <button class="icon" id="btn-options" title="Options">⚙</button>
+        <button class="icon" id="btn-menu" title="Menu principal">☰</button>
+      </div>
+    </header>
+    <nav id="nav">
+      <button data-view="map"><i>1</i>Manoir</button>
+      <button data-view="suspects"><i>2</i>Suspects</button>
+      <button data-view="dossier"><i>3</i>Dossier <span class="badge" id="badge-dossier" hidden>0</span></button>
+      <button data-view="board"><i>4</i>Tableau</button>
+      <button data-view="chrono"><i>5</i>Chronologie</button>
+      <button data-view="notes"><i>6</i>Notes</button>
+      <button data-view="indices"><i>7</i>Indices</button>
+      <button data-view="accuse" class="nav-accuse"><i>8</i>Accuser</button>
+    </nav>
+    <main id="main"></main>
+  </section>
+
+  <div id="modal" class="modal-back" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button id="modal-close" class="modal-x" aria-label="Fermer">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  <div id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/data2.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/blueprints.js"></script>
+  <script src="js/game.js"></script>
+
+</body></html>

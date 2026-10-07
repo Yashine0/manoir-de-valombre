@@ -1,0 +1,145 @@
+/* =====================================================================
+   Crédit + adaptation téléphone / tactile
+   ===================================================================== */
+:root { color-scheme: dark; }
+html, body { background: var(--bg); }
+.byline { margin: 22px 0 0; font-family: var(--f-hand); font-size: 30px; color: #3a2416; transform: rotate(-3deg); }
+.brand .by { font-family: var(--f-hand); font-style: normal; font-size: 15px; color: var(--amber); }
+.credits { margin-top: 30px; color: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+.credits b { font-family: var(--f-hand); font-size: 20px; color: var(--amber); font-weight: normal; }
+
+button, a, select, input, label { touch-action: manipulation; }
+#game.active { height: 100vh; height: 100dvh; }
+
+/* liste des objets à examiner sous la scène (masquée sur grand écran) */
+.hs-list { display: none; }
+.hs-item { background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 9px 12px; font-family: var(--f-mono); font-size: 13px; border-radius: 3px; }
+.hs-item.done { color: var(--muted); }
+.hs-item.exit { border-color: #5a4a30; color: var(--amber); }
+.hs-item:active { background: #2a2218; }
+
+/* appareils tactiles : pas de survol, étiquettes discrètes */
+@media (hover: none) {
+  .hotspot .hs-label { display: none; }
+  .hs-list { display: flex; flex-wrap: wrap; gap: 6px; max-width: 1100px; margin-top: 10px; }
+}
+
+@media (max-width: 760px) {
+  body { -webkit-text-size-adjust: 100%; }
+
+  /* titre */
+  .folder { padding: 40px 22px 28px; }
+  .folder-top { font-size: 10px; letter-spacing: .08em; }
+  .folder h1 { margin-top: 26px; }
+  .stamp { top: 64px; right: 10px; font-size: 13px; padding: 2px 8px; border-width: 3px; }
+  .btn.big { min-width: 0; width: 100%; }
+  .menu-row { width: 100%; }
+  .menu-row .btn { flex: 1; }
+
+  /* barre du haut */
+  #game.active { grid-template-rows: auto auto 1fr; }
+  .topbar { flex-wrap: wrap; gap: 6px 12px; padding: 8px 12px; padding-top: max(8px, env(safe-area-inset-top)); }
+  .brand b { font-size: 18px; }
+  .stats { display: flex; order: 3; flex-basis: 100%; margin: 0; gap: 12px; font-size: 11px; }
+  .stats .cred { margin-left: auto; }
+  .icon { width: 34px; height: 34px; }
+  .top-actions { margin-left: auto; }
+  #nav { padding: 4px 6px; gap: 2px; scrollbar-width: none; }
+  #nav::-webkit-scrollbar { display: none; }
+  #nav button { padding: 9px 10px; font-size: 13px; }
+  #nav button i { display: none; }
+  #nav button.active { box-shadow: inset 0 -3px 0 var(--red2); }
+
+  #main { padding: 14px 12px calc(40px + env(safe-area-inset-bottom)); }
+  .view-head h1 { font-size: 26px; }
+  .view-head p { font-size: 14px; }
+
+  /* plan : défilement horizontal pour rester lisible */
+  .map-wrap { overflow-x: auto; padding: 6px; }
+  .map-svg { min-width: 640px; }
+  .loc-chip { flex: 1 1 calc(50% - 8px); justify-content: space-between; padding: 10px 12px; }
+
+  /* scènes */
+  .scene { max-width: 100% !important; margin: 0 -12px; width: calc(100% + 24px); }
+  .hotspot .marker { width: 26px; height: 26px; font-size: 14px; }
+  .scene.has-photo .hotspot:not(.exit) .marker { width: 24px; height: 24px; }
+  .hs-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .scene-desc { font-size: 15px; }
+
+  /* suspects + interrogatoire */
+  .sus-grid { grid-template-columns: 1fr; }
+  .sus-card { padding: 10px; }
+  .sus-photo { width: 78px; }
+  .id-card { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 10px; }
+  .id-photo { margin: 0; }
+  .id-table { margin: 0; font-size: 12px; }
+  .id-table th { width: 42%; }
+  .id-card .btn.ghost { grid-column: 1 / -1; }
+  .dialog { font-size: 16px; padding: 14px; min-height: 0; }
+  .tab-body { padding: 12px; }
+  .depo { padding-left: 18px; }
+  .depo .line { flex-basis: 100%; font-size: 15px; }
+  .depo .present { margin-left: auto; }
+
+  /* dossier */
+  .piece-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .piece-card { padding: 10px; min-height: 70px; }
+  .piece-card .pt { font-size: 14px; }
+  .piece-card.with-img img { height: 70px; }
+
+  /* tableau */
+  .cork { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; padding: 16px 12px; min-height: 0; }
+  .pin-card img { height: 60px; }
+  .pin-card .pt { font-size: 12px; }
+  .deductions { position: static; }
+  .link-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding-bottom: calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 20px rgba(0,0,0,.6); }
+  .board-wrap { display: flex; flex-direction: column-reverse; padding-bottom: 70px; }
+
+  /* chronologie */
+  .timeline { padding: 12px; }
+  .timeline li { grid-template-columns: 62px 14px 1fr; gap: 6px; }
+  .timeline li + li::before { left: 74px; }
+  .timeline .t { font-size: 11px; }
+  .timeline .e { font-size: 13px; }
+  .timeline .src { display: none; }
+  .tl-filter { flex-direction: column; gap: 6px; }
+  .ws-grid { grid-template-columns: 1fr; }
+
+  /* notes, indices, accusation */
+  .notes-grid { grid-template-columns: 1fr; }
+  .accuse { padding: 16px; }
+  .radios label { font-size: 14px; }
+  .accuse-foot .btn { width: 100%; }
+
+  /* confrontation */
+  .cf-stage { grid-template-columns: 1fr; gap: 12px; }
+  .cf-portrait { max-width: 120px; border-width: 4px; }
+  .cf-claim, .aveux { font-size: 16px; padding: 12px 14px; }
+  .cf-log { max-height: 30vh; }
+  #cf-present { width: 100%; }
+
+  /* verdict */
+  .stamp-big { font-size: 28px; padding: 4px 14px; }
+  .verdict h1 { font-size: 26px; }
+  .res li { padding: 10px; font-size: 13px; }
+
+  /* modales plein écran */
+  .modal-back { padding: 0; align-items: stretch; }
+  .modal { max-height: 100dvh; height: 100%; max-width: 100% !important; border: 0; }
+  .modal-x { position: sticky; top: 8px; float: right; margin: 8px 8px 0 0; }
+  .doc { padding: 16px 16px 24px; }
+  .doc h2 { font-size: 24px; }
+  .doc-head { flex-direction: column; gap: 2px; }
+  .doc-table th, .doc-table td { padding: 6px; font-size: 13px; }
+  .exam { padding: 20px 16px; }
+  .pick-title { padding: 16px 16px 8px; font-size: 20px; }
+  .pick-list { padding: 0 16px 20px; }
+  .pick-filter { margin: 0 16px 6px; width: calc(100% - 32px); }
+  .diff { grid-template-columns: 1fr; }
+  .opt-row { flex-wrap: wrap; }
+  .opt-row input[type=range] { width: 100%; }
+  .slot-row { flex-wrap: wrap; }
+  .polaroid { padding: 6px 6px 28px; }
+  .phone { width: 100%; max-width: 260px; }
+  #toast { bottom: calc(14px + env(safe-area-inset-bottom)); width: calc(100% - 24px); text-align: center; }
+}
